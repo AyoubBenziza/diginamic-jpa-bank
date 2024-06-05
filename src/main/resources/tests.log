@@ -1,0 +1,1 @@
+1586 [main] ERROR errorLogger - Cannot invoke "fr.diginamic.bank.entities.Bank.getName()" because "bank" is null
