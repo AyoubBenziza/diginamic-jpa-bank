@@ -1,5 +1,3 @@
-package fr.diginamic.bank.tests;
-
 import fr.diginamic.bank.entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -37,6 +35,9 @@ public class TestBank {
         System.out.println();
     }
 
+    /**
+     * Close the EntityManager and the EntityManagerFactory
+     */
     @AfterClass
     public static void end() {
         try {
@@ -48,9 +49,15 @@ public class TestBank {
         System.out.println("<--- Fin des tests --->");
     }
 
+    /**
+     * Test the connection to the database
+     */
     @Test
     public void connection() {Assert.assertNotNull(em);}
 
+    /**
+     * Test the creation of a bank
+     */
     @Test
     public void createBank() {
         Bank bank = new Bank("Société Générale");
@@ -62,6 +69,9 @@ public class TestBank {
         Assert.assertEquals("Société Générale", bank2.getName());
     }
 
+    /**
+     * Test the retrieval of a bank
+     */
     @Test
     public void getBank() {
         try{
@@ -72,6 +82,9 @@ public class TestBank {
         }
     }
 
+    /**
+     * Test the insertion of a client
+     */
     @Test
     public void insertClient() {
         Address address = new Address(1, "rue de la Paix", "75000", "Paris");
@@ -82,6 +95,9 @@ public class TestBank {
         et.commit();
     }
 
+    /**
+     * Test the insertion of a current account
+     */
     @Test
     public void insertLivretA() {
         LivretA livretA = new LivretA(1, 0, 0.03, em.find(Bank.class, 1));
@@ -93,6 +109,9 @@ public class TestBank {
         et.commit();
     }
 
+    /**
+     * Test the insertion of a savings account
+     */
     @Test
     public void insertAssuranceVie(){
         AssuranceVie assuranceVie = new AssuranceVie(2, 0.75, LocalDate.of(2022, 12, 31), 0.03, em.find(Bank.class, 1));
@@ -104,6 +123,9 @@ public class TestBank {
         et.commit();
     }
 
+    /**
+     * Test the insertion of a virement operation
+     */
     @Test
     public void insertOperation(){
         Account account = em.find(Account.class, 1);
